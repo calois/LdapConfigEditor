@@ -1,4 +1,5 @@
 (function($) {
+	'use strict';
 	String.prototype.endsWith = function(s) {
 		if (!s) {
 			return false;
@@ -144,7 +145,7 @@
 			restrict : "A"
 		};
 	});
-	angular.module('utils').directive("gfaDropdown", function() {
+	angular.module('utils').directive("nasDropdown", function() {
 		return {
 			link : function(scope, element, attrs) {
 				element.dropdown();
@@ -183,14 +184,14 @@
 		};
 		return i18nDirective;
 	})
-	angular.module('utils').directive("gfaMsg", function() {
+	angular.module('utils').directive("nasMsg", function() {
 		return function(scope, element, attrs) {
-			scope.$watch(attrs["gfaMsg"], function(newValue, oldValue, scope) {
+			scope.$watch(attrs["nasMsg"], function(newValue, oldValue, scope) {
 				element.showMsg(newValue);
 			});
 		};
 	});
-	angular.module('utils').directive("gfaPercent", function($parse) {
+	angular.module('utils').directive("nasPercent", function($parse) {
 		return {
 			require : "?ngModel",
 			link : function(scope, element, attrs) {
@@ -231,7 +232,7 @@
 			restrict : "A"
 		};
 	});
-	angular.module('utils').directive("gfaDollar", function($parse) {
+	angular.module('utils').directive("nasDollar", function($parse) {
 		return {
 			require : "?ngModel",
 			link : function(scope, element, attrs, ngModel) {
@@ -266,35 +267,35 @@
 	angular
 			.module('utils')
 			.directive(
-					"gfaScroll",
+					"nasScroll",
 					function($parse) {
 						return {
 							link : function(scope, element, attrs) {
 								scope.atTheButtom = false;
-								scope.gfaScroll.setContainer(element);
+								scope.nasScroll.setContainer(element);
 								$(element)
 										.scroll(
 												function() {
 													if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight
 															&& scope.atTheButtom == false) {
 														scope.atTheButtom = true;
-														scope.gfaScroll.more();
+														scope.nasScroll.more();
 													} else if ($(this).scrollTop() + $(this).innerHeight() <= (this.scrollHeight - 20)) {
 														scope.atTheButtom = false;
 													}
 												});
 							},
 							scope : {
-								'gfaScroll' : '='
+								'nasScroll' : '='
 							},
 							restrict : "A"
 						};
 					});
-	angular.module('utils').directive("gfaOnLoading", function() {
+	angular.module('utils').directive("nasOnLoading", function() {
 		return {
 			link : function(scope, element, attrs) {
 				var loading = $('<div class="center-block loading">&nbsp;</div>');
-				scope.$watch(attrs.gfaOnLoading, function(value) {
+				scope.$watch(attrs.nasOnLoading, function(value) {
 					if (value) {
 						element.append(loading);
 					} else {
@@ -305,7 +306,7 @@
 			restrict : "A"
 		};
 	});
-	angular.module('utils').directive("gfaSortGrid", function() {
+	angular.module('utils').directive("nasSortGrid", function() {
 		return {
 			link : function(scope, element, attrs) {
 
@@ -329,7 +330,7 @@
 				};
 			},
 			scope : {
-				sort : '=gfaSortGrid'
+				sort : '=nasSortGrid'
 			},
 			restrict : "A"
 		};
@@ -337,22 +338,22 @@
 	angular
 			.module('utils')
 			.directive(
-					"gfaSortColumn",
+					"nasSortColumn",
 					function($parse) {
 						return {
-							require : "^gfaSortGrid",
-							link : function(scope, element, attrs, gfaSortGrid) {
-								gfaSortGrid.register(scope);
+							require : "^nasSortGrid",
+							link : function(scope, element, attrs, nasSortGrid) {
+								nasSortGrid.register(scope);
 								scope.direction = -1;
 								element.on('click', function() {
 									scope.$apply(function() {
 										scope.direction = (scope.direction + 1) % 2;
 									});
-									gfaSortGrid.sort(scope);
+									nasSortGrid.sort(scope);
 								});
 							},
 							scope : {
-								property : '@gfaSortColumn'
+								property : '@nasSortColumn'
 							},
 							transclude : true,
 							template : '<span ng-transclude></span><span ng-hide="direction==-1" ng-class="{\'glyphicon-arrow-up\':direction==0,\'glyphicon-arrow-down\':direction==1}" class="glyphicon"></span>',
@@ -368,12 +369,12 @@
 			templateUrl : utils.getUrl('resources/html/paging.html')
 		};
 	});
-	angular.module('utils').directive("gfaAnimate", function() {
+	angular.module('utils').directive("nasAnimate", function() {
 		return {
 			link : function(scope, element, attrs, ngModel) {
-				scope.animateClass = attrs.gfaAnimate;
-				scope.animateDelay = attrs.gfaAnimateDelay;
-				scope.animateDuration = attrs.gfaAnimateDuration;
+				scope.animateClass = attrs.nasAnimate;
+				scope.animateDelay = attrs.nasAnimateDelay;
+				scope.animateDuration = attrs.nasAnimateDuration;
 
 				if (scope.animateDelay) {
 					element.css({
@@ -410,7 +411,7 @@
 			restrict : "A"
 		};
 	});
-	angular.module('utils').directive("gfaAutoFocus", function() {
+	angular.module('utils').directive("nasAutoFocus", function() {
 		return {
 			link : function(scope, element, attrs) {
 				element.focus();
@@ -418,7 +419,7 @@
 			restrict : "A"
 		};
 	});
-	angular.module('utils').directive("gfaDate", function($parse) {
+	angular.module('utils').directive("nasDate", function($parse) {
 		return {
 			require : "?ngModel",
 			link : function(scope, element, attrs) {
@@ -460,12 +461,12 @@
 			restrict : "A"
 		};
 	});
-	angular.module('utils').directive("gfaSameAs", function($parse) {
+	angular.module('utils').directive("nasSameAs", function($parse) {
 		return {
 			require : 'ngModel',
 			link : function(scope, elem, attr, ngModel) {
-				var target = attr.gfaSameAs;
-				var errorCode = attr.gfaSameAsErrorCode ? attr.gfaSameAsErrorCode : 'same';
+				var target = attr.nasSameAs;
+				var errorCode = attr.nasSameAsErrorCode ? attr.nasSameAsErrorCode : 'same';
 				var getter = $parse(target);
 				scope.$watch(target, function(value) {
 					ngModel.$setValidity(errorCode, value == ngModel.$modelValue);
@@ -476,7 +477,7 @@
 			}
 		};
 	});
-	angular.module('utils').directive("gfaError", function($parse) {
+	angular.module('utils').directive("nasError", function($parse) {
 		return {
 			require : 'ngModel',
 			link : function(scope, elem, attr, ngModel) {
@@ -520,14 +521,14 @@
 	angular
 			.module('utils')
 			.directive(
-					"gfaInputClear",
+					"nasInputClear",
 					function() {
 						return {
 							require : 'ngModel',
 							link : function(scope, elem, attr, ngModel) {
 								return;
 								$(
-										'<a tabindex="-1" class="glyphicon glyphicon-remove form-control-feedback gfaInputClear" href="javascript:;"></a>')
+										'<a tabindex="-1" class="glyphicon glyphicon-remove form-control-feedback nasInputClear" href="javascript:;"></a>')
 										.insertAfter(elem).click(function() {
 											scope.$apply(function() {
 												ngModel.$setViewValue('');
@@ -556,7 +557,7 @@
 		msgFilter.$stateful = true;
 		return msgFilter;
 	});
-	angular.module('utils').filter("gfaHighlight", function() {
+	angular.module('utils').filter("nasHighlight", function() {
 		return function(value, key) {
 			if (!key || !value) {
 				return value;
@@ -564,17 +565,17 @@
 			return value.replace(new RegExp(key, 'gi'), '<mark>$&</mark>');
 		};
 	});
-	angular.module('utils').filter("gfaDollar", function(currencyFilter) {
+	angular.module('utils').filter("nasDollar", function(currencyFilter) {
 		return function(value) {
 			return currencyFilter(value, '$');
 		};
 	});
-	angular.module('utils').filter("gfaNumber", function(numberFilter) {
+	angular.module('utils').filter("nasNumber", function(numberFilter) {
 		return function(value) {
 			return numberFilter(value, 2);
 		};
 	});
-	angular.module('utils').filter("gfaPercent", function(numberFilter) {
+	angular.module('utils').filter("nasPercent", function(numberFilter) {
 		return function(value) {
 			if (value) {
 				return numberFilter(value, 2) + '%';
@@ -583,7 +584,7 @@
 			}
 		};
 	});
-	angular.module('utils').filter("gfaTimeDiff", function() {
+	angular.module('utils').filter("nasTimeDiff", function() {
 		return function(value) {
 			var days = parseInt(value / 24);
 			var hours = value % 24;
