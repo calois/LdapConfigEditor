@@ -37,7 +37,116 @@
 										_type : 'boolean'
 									}
 								}
+							},
+							metamarkets : {
+								_type : 'array',
+								_item : {
+									_type : 'object',
+									code : {
+										_type : 'string'
+									},
+									name : {
+										_type : 'string'
+									},
+									img : {
+										_type : 'string'
+									},
+									email : {
+										_type : 'email'
+									},
+									config : {
+										_type : 'string'
+									},
+									skipAddIfExist : {
+										_type : 'boolean'
+									},
+									skipEditIfExist : {
+										_type : 'boolean'
+									},
+									removeAfterTest : {
+										_type : 'boolean'
+									}
+								}
+							},
+							persons : {
+								_type : 'array',
+								_item : {
+									_type : 'object',
+									id : {
+										_type : 'string'
+									},
+									surname : {
+										_type : 'string'
+									},
+									fullName : {
+										_type : 'string'
+									},
+									email : {
+										_type : 'email'
+									},
+									phone : {
+										_type : 'string'
+									},
+									mobile : {
+										_type : 'boolean'
+									},
+									skipAddIfExist : {
+										_type : 'boolean'
+									},
+									skipEditIfExist : {
+										_type : 'boolean'
+									},
+									removeAfterTest : {
+										_type : 'boolean'
+									}
+								}
+							},
+							managers : {
+								_type : 'array',
+								_item : {
+									_type : 'object',
+									id : {
+										_type : 'string'
+									},
+									personId : {
+										_type : 'string'
+									},
+									timezone : {
+										_type : 'string'
+									},
+									language : {
+										_type : 'email'
+									},
+									comments : {
+										_type : 'string'
+									},
+									skipAddIfExist : {
+										_type : 'boolean'
+									},
+									skipEditIfExist : {
+										_type : 'boolean'
+									},
+									removeAfterTest : {
+										_type : 'boolean'
+									},
+									permissions : {
+										_type : 'array',
+										_item : {
+											_type : 'object',
+											clientId : {
+												_type : 'string'
+											},
+											marketCode : {
+												_type : 'string'
+											},
+											role : {
+												_type : 'string'
+											}
+										}
+									}
+								}
 							}
+
 						};
 						$scope.data = {
 							"markets" : [
@@ -57,8 +166,165 @@
 										"email" : "test@nasdaq.com",
 										"removeIfExisting" : "true",
 										"removeAfterTest" : "true"
+									}],
+							"metamarkets" : [{
+								"code" : "australia",
+								"name" : "Crossmarket Australia",
+								"img" : "//AU04OFFFS01/SMARTS-QA-Support/Automation-Test-Data/LDAP-Config/markets/xm_au.png",
+								"alertsCode" : "australia",
+								"config" : "core.metamarket.config=ldapservicedemo",
+								"removeIfExisting" : "true",
+								"removeAfterTest" : "true"
+							}],
+							"persons" : [{
+								"id" : "test",
+								"surname" : "Test",
+								"fullName" : "Automation Test",
+								"email" : "joy.chiu@nasdaq.com",
+								"phone" : "02 0000 0000",
+								"mobile" : "04 0000 0000"
+							}],
+							"managers" : [{
+								"id" : "test",
+								"personId" : "test",
+								"timezone" : "Australia/Sydney",
+								"language" : "Chinese",
+								"comments" : "Only for Test - manager",
+								"removeIfExisting" : "true",
+								"removeAfterTest" : "true",
+								"permissions" : [{
+									"clientId" : "*",
+									"marketCode" : "*",
+									"role" : "userManager"
+								}, {
+									"clientId" : "*",
+									"marketCode" : "*",
+									"role" : "passwordResetter"
+								}, {
+									"clientId" : "*",
+									"marketCode" : "*",
+									"role" : "notifier"
+								}]
+							}],
+							"clients" : [{
+								"id" : "ldapservicedemo",
+								"name" : "ldapservicedemo",
+								"image" : "//AU04OFFFS01/SMARTS-QA-Support/Automation-Test-Data/LDAP-Config/brokers/nasdaq-omx_smarts.png",
+								"url" : "https://ldapservicedemo.dev.smbc.nasdaqomx.com/cmss",
+								"ip" : "127.0.0.1",
+								"locale" : "English (energy)",
+								"timeout" : "1000",
+								"password" : "Password01",
+								"loginAttempts" : "2",
+								"expiryDays" : "90",
+								"config" : "core.cache.perHouse=true\ncore.cache.daysToLeaveFree=-1",
+								"broadcastMsg" : "LDAP Config Service Demo - ldapservicedemo",
+								"upload" : "test_upload_01;\"DemoforExample\";.csv\ntest_upload_02;\"Demo for Example\";.csv\ntest_upload_03;\"Demo for Example\";.csv",
+								"removeIfExisting" : "false",
+								"removeAfterTest" : "true",
+								"markets" : [{
+									"code" : "asx",
+									"dir" : "citigroupgm_asx",
+									"limit" : "20",
+									"newsPermission" : "true",
+									"iconVisible" : "true",
+									"userManageable" : "true",
+									"config" : "client.market.config=test",
+									"cutoff" : "18:00",
+									"broadcastMsg" : "LDAP Config Service Demo - ASX",
+									"houses" : [{
+										"code" : "203",
+										"accountTypeRules" : "Ctag=BTag\n.*=XYZ",
+										"dataRestrict" : "20140101-",
+										"entityTags" : "T,ZCHZBX,SDMA"
+									}],
+									"removeIfExisting" : "false",
+									"removeAfterTest" : "true"
+								}, {
+									"code" : "chixau",
+									"dir" : "citigroupgm_chixau",
+									"newsPermission" : "true",
+									"iconVisible" : "true",
+									"userManageable" : "true",
+									"houses" : [{
+										"code" : "203"
 									}]
-						}
+								}],
+								"metamarkets" : [{
+									"code" : "australia",
+									"dir" : "citigroupgm_australia",
+									"limit" : "30",
+									"crossmarketView" : "true",
+									"derivativesView" : "true",
+									"iconVisible" : "true",
+									"userManageable" : "true",
+									"config" : "client.metamarket.config=test",
+									"removeIfExisting" : "false",
+									"removeAfterTest" : "true",
+									"submarkets" : ["asx", "chixau"],
+									"metahouses" : [{
+										"code" : "CITIGROUPGM",
+										"allIncluded" : "true",
+										"dataRestrict" : "20130101-",
+										"securityRestrict" : "AAA",
+										"removeIfExisting" : "false",
+										"removeAfterTest" : "true",
+										"members" : [{
+											"marketCode" : "asx",
+											"houseCodes" : ["203"]
+										}, {
+											"marketCode" : "chixau",
+											"houseCodes" : ["203"]
+										}]
+									}]
+								}],
+								"users" : [{
+									"id" : "test",
+									"personId" : "test",
+									"internal" : "false",
+									"pwdCheck" : "true",
+									"timezone" : "Asia/Shanghai",
+									"language" : "Chinese (broker)",
+									"comments" : "Only for test - client user",
+									"removeIfExisting" : "true",
+									"removeAfterTest" : "true",
+									"permission" : {
+										"cmssUser" : "true",
+										"cmssManager" : "true",
+										"cmssUpload" : "true",
+										"cmssUserList" : "true",
+										"cmssUserManager" : "true",
+										"cmssParameterManager" : "true",
+										"cmssAnalytics" : "true"
+									},
+									"marketPermissions" : [{
+										"code" : "asx",
+										"selectDefaults" : "true"
+									}, {
+										"code" : "chixau",
+										"marketData" : "true",
+										"brokerData" : "true",
+										"allAlerts" : "true",
+										"alertMgmt" : "true",
+										"dataQuality" : "true",
+										"housePermission" : [{
+											"code" : "203",
+											"watchList" : "true",
+											"brokerData" : "true",
+											"allAlerts" : "true"
+										}]
+									}],
+									"metamarketPermissions" : [{
+										"code" : "australia",
+										"marketData" : "true"
+									}],
+									"uploadPermissions" : [{
+										"id" : "test_upload_01",
+										"allowed" : "true"
+									}]
+								}]
+							}]
+						};
 						function buildTree(config, data) {
 							var result = [];
 							switch (config._type) {
