@@ -7,24 +7,35 @@
 
 					<!-- Nested list template -->
 					<script type="text/ng-template" id="items_renderer.html">
-                <div ui-tree-handle ng-class="{ 'select': $treeScope.multiSelect, 'copy': $treeScope.copy }">
-                  <a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)">
-                    <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }"></span>
-                  </a>
-                  {{item.title}}
-
-                  <a class="pull-right btn btn-danger btn-xs" nodrag ng-click="remove(this)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </a>
-                  <a class="pull-right btn btn-primary btn-xs" nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </a>
-                </div>
-                <ol ui-tree-nodes ng-model="item.items" ng-class="{ 'hidden': collapsed }">
-                  <li ng-repeat="item in item.items" ui-tree-node ng-class="{ 'selected': selected, 'original': original }" ng-include="'items_renderer.html'"></li>
-                </ol>
-              </script>
-					<ui-tree callbacks="callbacks"
+<div ui-tree-handle>
+	<a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)"
+		ng-hide="item._config._type!='array'&&item._config._type!='object'">
+		<span class="glyphicon"
+		ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }"></span>
+	</a> <span
+		ng-hide="item._config._type!='array'&&item._config._type!='object'">{{item.title}}</span>
+	<span class="row"
+		ng-show="item._config._type!='array'&&item._config._type!='object'"
+		style='margin: 0;'> <label class="col-sm-3 control-label">{{item.title}}</label>
+		<div class="col-sm-9">
+			<input ng-model="item.value" class="form-control" />
+		</div>
+	</span> <a class="pull-right btn btn-danger btn-xs" nodrag
+		ng-click="remove(this)" ng-show="item.canBeDeleted"> <span
+		class="glyphicon glyphicon-remove"></span>
+	</a> <a class="pull-right btn btn-primary btn-xs" nodrag
+		ng-click="newSubItem(this)" style="margin-right: 8px;"
+		ng-show="item.canAdd"> <span class="glyphicon glyphicon-plus"></span>
+	</a>
+</div>
+<ol ui-tree-nodes ng-model="item.items"
+	ng-class="{ 'hidden': collapsed }">
+	<li ng-repeat="item in item.items" ui-tree-node
+		ng-class="{ 'selected': selected, 'original': original }"
+		ng-include="'items_renderer.html'"></li>
+</ol>
+              		</script>
+					<ui-tree callbacks="callbacks" class="form-horizontal"
 						drag-enabled="parameters.dragEnabled"
 						empty-placeholder-enabled="parameters.emptyPlaceholderEnabled"
 						max-depth="parameters.maxDepth" drag-delay="parameters.dragDelay"
@@ -41,15 +52,13 @@
 					</ol>
 					</ui-tree>
 				</div>
-
 				<div class="col-lg-6">
 					<h4>Full tree</h4>
-					<pre class="code">{{ list | json }}</pre>
+					<pre class="code">{{ getConfig() | json }}</pre>
 				</div>
 			</div>
 
 		</div>
 
 	</div>
-</div>
 </div>
