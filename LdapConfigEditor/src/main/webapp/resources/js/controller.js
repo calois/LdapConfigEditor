@@ -115,7 +115,7 @@
 										_type : 'string'
 									},
 									language : {
-										_type : 'email'
+										_type : 'string'
 									},
 									comments : {
 										_type : 'string'
@@ -141,6 +141,342 @@
 											},
 											role : {
 												_type : 'string'
+											}
+										}
+									}
+								}
+							},
+							clients : {
+								_type : 'array',
+								_item : {
+									_type : 'object',
+									id : {
+										_type : 'string'
+									},
+									name : {
+										_type : 'string'
+									},
+									image : {
+										_type : 'string'
+									},
+									url : {
+										_type : 'string'
+									},
+									ip : {
+										_type : 'string'
+									},
+									locale : {
+										_type : 'string'
+									},
+									timeout : {
+										_type : 'string'
+									},
+									password : {
+										_type : 'string'
+									},
+									loginAttempts : {
+										_type : 'string'
+									},
+									expiryDays : {
+										_type : 'string'
+									},
+									config : {
+										_type : 'string'
+									},
+									broadcastMsg : {
+										_type : 'string'
+									},
+									upload : {
+										_type : 'string'
+									},
+									skipAddIfExist : {
+										_type : 'boolean'
+									},
+									skipEditIfExist : {
+										_type : 'boolean'
+									},
+									removeAfterTest : {
+										_type : 'boolean'
+									},
+									markets : {
+										_type : 'array',
+										_item : {
+											_type : 'object',
+											code : {
+												_type : 'string'
+											},
+											dir : {
+												_type : 'string'
+											},
+											limit : {
+												_type : 'string'
+											},
+											newsPermission : {
+												_type : 'boolean'
+											},
+											iconVisible : {
+												_type : 'boolean'
+											},
+											userManageable : {
+												_type : 'boolean'
+											},
+											config : {
+												_type : 'string'
+											},
+											cutoff : {
+												_type : 'string'
+											},
+											broadcastMsg : {
+												_type : 'string'
+											},
+											skipAddIfExist : {
+												_type : 'boolean'
+											},
+											skipEditIfExist : {
+												_type : 'boolean'
+											},
+											removeAfterTest : {
+												_type : 'boolean'
+											},
+											houses : {
+												_type : 'array',
+												_item : {
+													_type : 'object',
+													code : {
+														_type : 'string'
+													},
+													accountTypeRules : {
+														_type : 'string'
+													},
+													dataRestrict : {
+														_type : 'string'
+													},
+													entityTags : {
+														_type : 'string'
+													},
+													skipAddIfExist : {
+														_type : 'boolean'
+													},
+													skipEditIfExist : {
+														_type : 'boolean'
+													},
+													removeAfterTest : {
+														_type : 'boolean'
+													}
+												}
+											}
+										}
+									},
+									metamarkets : {
+										_type : 'array',
+										_item : {
+											_type : 'object',
+											code : {
+												_type : 'string'
+											},
+											dir : {
+												_type : 'string'
+											},
+											limit : {
+												_type : 'string'
+											},
+											crossmarketView : {
+												_type : 'boolean'
+											},
+											derivativesView : {
+												_type : 'boolean'
+											},
+											iconVisible : {
+												_type : 'boolean'
+											},
+											userManageable : {
+												_type : 'boolean'
+											},
+											config : {
+												_type : 'string'
+											},
+											skipAddIfExist : {
+												_type : 'boolean'
+											},
+											skipEditIfExist : {
+												_type : 'boolean'
+											},
+											removeAfterTest : {
+												_type : 'boolean'
+											},
+											submarkets : {
+												_type : 'array',
+												_item : {
+													_type : 'string'
+												}
+											},
+											metahouses : {
+												_type : 'array',
+												_item : {
+													_type : 'object',
+													code : {
+														_type : 'string'
+													},
+													allIncluded : {
+														_type : 'string'
+													},
+													dataRestrict : {
+														_type : 'string'
+													},
+													securityRestrict : {
+														_type : 'boolean'
+													},
+													skipAddIfExist : {
+														_type : 'boolean'
+													},
+													skipEditIfExist : {
+														_type : 'boolean'
+													},
+													removeAfterTest : {
+														_type : 'boolean'
+													},
+													members : {
+														_type : 'array',
+														_item : {
+															_type : 'object',
+															marketCode : {
+																_type : 'string'
+															},
+															houseCodes : {
+																_type : 'array',
+																_item : {
+																	_type : 'string'
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									users : {
+										_type : 'array',
+										_item : {
+											_type : 'object',
+											id : {
+												_type : 'string'
+											},
+											personId : {
+												_type : 'string'
+											},
+											internal : {
+												_type : 'string'
+											},
+											pwdCheck : {
+												_type : 'string'
+											},
+											timezone : {
+												_type : 'string'
+											},
+											language : {
+												_type : 'string'
+											},
+											comments : {
+												_type : 'string'
+											},
+											skipAddIfExist : {
+												_type : 'boolean'
+											},
+											skipEditIfExist : {
+												_type : 'boolean'
+											},
+											removeAfterTest : {
+												_type : 'boolean'
+											},
+											permission : {
+												_type : 'object',
+												cmssUser : {
+													_type : 'boolean'
+												},
+												cmssManager : {
+													_type : 'boolean'
+												},
+												cmssUpload : {
+													_type : 'boolean'
+												},
+												cmssUserList : {
+													_type : 'boolean'
+												},
+												cmssUserManager : {
+													_type : 'boolean'
+												},
+												cmssParameterManager : {
+													_type : 'boolean'
+												},
+												cmssAnalytics : {
+													_type : 'boolean'
+												}
+											},
+											marketPermissions : {
+												_type : 'array',
+												_item : {
+													_type : 'object',
+													code : {
+														_type : 'string'
+													},
+													marketData : {
+														_type : 'string'
+													},
+													brokerData : {
+														_type : 'string'
+													},
+													allAlerts : {
+														_type : 'string'
+													},
+													alertMgmt : {
+														_type : 'string'
+													},
+													dataQuality : {
+														_type : 'string'
+													},
+													housePermission : {
+														_type : 'array',
+														_item : {
+															_type : 'object',
+															code : {
+																_type : 'string'
+															},
+															watchList : {
+																_type : 'boolean'
+															},
+															brokerData : {
+																_type : 'boolean'
+															},
+															allAlerts : {
+																_type : 'boolean'
+															}
+														}
+													}
+												}
+											},
+											metamarketPermissions : {
+												_type : 'array',
+												_item : {
+													_type : 'object',
+													code : {
+														_type : 'string'
+													},
+													marketData : {
+														_type : 'boolean'
+													}
+												}
+											},
+											uploadPermissions : {
+												_type : 'array',
+												_item : {
+													_type : 'object',
+													id : {
+														_type : 'string'
+													},
+													allowed : {
+														_type : 'boolean'
+													}
+												}
 											}
 										}
 									}

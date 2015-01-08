@@ -1,5 +1,7 @@
 var app = angular.module("app", ['ngLocale', 'ngRoute', 'ngSanitize', 'ui.bootstrap', 'ngResource', 'ngAnimate',
-		'utils', 'ui.router', 'angular-loading-bar', 'ui.tree']);
+		'utils', 'ui.router', 'angular-loading-bar', 'ui.tree'], function($rootScopeProvider) {
+	$rootScopeProvider.digestTtl(15);
+});
 app.config(function($httpProvider) {
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 });
