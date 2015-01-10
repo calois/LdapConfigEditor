@@ -831,6 +831,11 @@
 									result.push(toJson(node.items[i]));
 								}
 								return result;
+							case 'boolean':
+								if (node.value != '') {
+									return node.value;
+								}
+								break;
 							default:
 								return node.value;
 							}
