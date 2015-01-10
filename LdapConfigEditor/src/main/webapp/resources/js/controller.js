@@ -502,8 +502,8 @@
 										"email" : "test@nasdaq.com",
 										"removeIfExisting" : "true",
 										"removeAfterTest" : "true"
-									}],
-							"metamarkets" : [{
+									} ],
+							"metamarkets" : [ {
 								"code" : "australia",
 								"name" : "Crossmarket Australia",
 								"img" : "//AU04OFFFS01/SMARTS-QA-Support/Automation-Test-Data/LDAP-Config/markets/xm_au.png",
@@ -511,16 +511,16 @@
 								"config" : "core.metamarket.config=ldapservicedemo",
 								"removeIfExisting" : "true",
 								"removeAfterTest" : "true"
-							}],
-							"persons" : [{
+							} ],
+							"persons" : [ {
 								"id" : "test",
 								"surname" : "Test",
 								"fullName" : "Automation Test",
 								"email" : "joy.chiu@nasdaq.com",
 								"phone" : "02 0000 0000",
 								"mobile" : "04 0000 0000"
-							}],
-							"managers" : [{
+							} ],
+							"managers" : [ {
 								"id" : "test",
 								"personId" : "test",
 								"timezone" : "Australia/Sydney",
@@ -528,7 +528,7 @@
 								"comments" : "Only for Test - manager",
 								"removeIfExisting" : "true",
 								"removeAfterTest" : "true",
-								"permissions" : [{
+								"permissions" : [ {
 									"clientId" : "*",
 									"marketCode" : "*",
 									"role" : "userManager"
@@ -540,9 +540,9 @@
 									"clientId" : "*",
 									"marketCode" : "*",
 									"role" : "notifier"
-								}]
-							}],
-							"clients" : [{
+								} ]
+							} ],
+							"clients" : [ {
 								"id" : "ldapservicedemo",
 								"name" : "ldapservicedemo",
 								"image" : "//AU04OFFFS01/SMARTS-QA-Support/Automation-Test-Data/LDAP-Config/brokers/nasdaq-omx_smarts.png",
@@ -558,35 +558,36 @@
 								"upload" : "test_upload_01;\"DemoforExample\";.csv\ntest_upload_02;\"Demo for Example\";.csv\ntest_upload_03;\"Demo for Example\";.csv",
 								"removeIfExisting" : "false",
 								"removeAfterTest" : "true",
-								"markets" : [{
-									"code" : "asx",
-									"dir" : "citigroupgm_asx",
-									"limit" : "20",
-									"newsPermission" : "true",
-									"iconVisible" : "true",
-									"userManageable" : "true",
-									"config" : "client.market.config=test",
-									"cutoff" : "18:00",
-									"broadcastMsg" : "LDAP Config Service Demo - ASX",
-									"houses" : [{
-										"code" : "203",
-										"accountTypeRules" : "Ctag=BTag\n.*=XYZ",
-										"dataRestrict" : "20140101-",
-										"entityTags" : "T,ZCHZBX,SDMA"
-									}],
-									"removeIfExisting" : "false",
-									"removeAfterTest" : "true"
-								}, {
-									"code" : "chixau",
-									"dir" : "citigroupgm_chixau",
-									"newsPermission" : "true",
-									"iconVisible" : "true",
-									"userManageable" : "true",
-									"houses" : [{
-										"code" : "203"
-									}]
-								}],
-								"metamarkets" : [{
+								"markets" : [
+										{
+											"code" : "asx",
+											"dir" : "citigroupgm_asx",
+											"limit" : "20",
+											"newsPermission" : "true",
+											"iconVisible" : "true",
+											"userManageable" : "true",
+											"config" : "client.market.config=test",
+											"cutoff" : "18:00",
+											"broadcastMsg" : "LDAP Config Service Demo - ASX",
+											"houses" : [ {
+												"code" : "203",
+												"accountTypeRules" : "Ctag=BTag\n.*=XYZ",
+												"dataRestrict" : "20140101-",
+												"entityTags" : "T,ZCHZBX,SDMA"
+											} ],
+											"removeIfExisting" : "false",
+											"removeAfterTest" : "true"
+										}, {
+											"code" : "chixau",
+											"dir" : "citigroupgm_chixau",
+											"newsPermission" : "true",
+											"iconVisible" : "true",
+											"userManageable" : "true",
+											"houses" : [ {
+												"code" : "203"
+											} ]
+										} ],
+								"metamarkets" : [ {
 									"code" : "australia",
 									"dir" : "citigroupgm_australia",
 									"limit" : "30",
@@ -597,24 +598,24 @@
 									"config" : "client.metamarket.config=test",
 									"removeIfExisting" : "false",
 									"removeAfterTest" : "true",
-									"submarkets" : ["asx", "chixau"],
-									"metahouses" : [{
+									"submarkets" : [ "asx", "chixau" ],
+									"metahouses" : [ {
 										"code" : "CITIGROUPGM",
 										"allIncluded" : "true",
 										"dataRestrict" : "20130101-",
 										"securityRestrict" : "AAA",
 										"removeIfExisting" : "false",
 										"removeAfterTest" : "true",
-										"members" : [{
+										"members" : [ {
 											"marketCode" : "asx",
-											"houseCodes" : ["203"]
+											"houseCodes" : [ "203" ]
 										}, {
 											"marketCode" : "chixau",
-											"houseCodes" : ["203"]
-										}]
-									}]
-								}],
-								"users" : [{
+											"houseCodes" : [ "203" ]
+										} ]
+									} ]
+								} ],
+								"users" : [ {
 									"id" : "test",
 									"personId" : "test",
 									"internal" : "false",
@@ -633,7 +634,7 @@
 										"cmssParameterManager" : "true",
 										"cmssAnalytics" : "true"
 									},
-									"marketPermissions" : [{
+									"marketPermissions" : [ {
 										"code" : "asx",
 										"selectDefaults" : "true"
 									}, {
@@ -643,116 +644,119 @@
 										"allAlerts" : "true",
 										"alertMgmt" : "true",
 										"dataQuality" : "true",
-										"housePermission" : [{
+										"housePermission" : [ {
 											"code" : "203",
 											"watchList" : "true",
 											"brokerData" : "true",
 											"allAlerts" : "true"
-										}]
-									}],
-									"metamarketPermissions" : [{
+										} ]
+									} ],
+									"metamarketPermissions" : [ {
 										"code" : "australia",
 										"marketData" : "true"
-									}],
-									"uploadPermissions" : [{
+									} ],
+									"uploadPermissions" : [ {
 										"id" : "test_upload_01",
 										"allowed" : "true"
-									}]
-								}]
-							}]
+									} ]
+								} ]
+							} ]
 						};
 						function buildTree(config, data) {
 							var result = [];
 							switch (config._type) {
-								case 'object' :
-									for ( var i in config) {
-										if (angular.isString(i) && i.indexOf('_') == 0) {
-											continue;
+							case 'object':
+								for ( var i in config) {
+									if (angular.isString(i)
+											&& i.indexOf('_') == 0) {
+										continue;
+									}
+									if (data && i in data) {
+										switch (config[i]._type) {
+										case 'object':
+											result.push({
+												title : i,
+												_config : config[i],
+												items : buildTree(config[i],
+														data[i])
+											});
+											break;
+										case 'array':
+											result.push({
+												title : i,
+												canAdd : true,
+												_config : config[i],
+												items : buildTree(config[i],
+														data[i])
+											});
+											break;
+										default:
+											result.push({
+												title : i,
+												value : data[i],
+												_config : config[i],
+											});
+											break;
 										}
-										if (data && i in data) {
-											switch (config[i]._type) {
-												case 'object' :
-													result.push({
-														title : i,
-														_config : config[i],
-														items : buildTree(config[i], data[i])
-													});
-													break;
-												case 'array' :
-													result.push({
-														title : i,
-														canAdd : true,
-														_config : config[i],
-														items : buildTree(config[i], data[i])
-													});
-													break;
-												default :
-													result.push({
-														title : i,
-														value : data[i],
-														_config : config[i],
-													});
-													break;
-											}
-										} else {
-											switch (config[i]._type) {
-												case 'object' :
-													result.push({
-														title : i,
-														_config : config[i],
-														items : buildTree(config[i])
-													});
-													break;
-												case 'array' :
-													result.push({
-														title : i,
-														canAdd : true,
-														_config : config[i],
-														items : []
-													});
-													break;
-												default :
-													result.push({
-														title : i,
-														_config : config[i]
-													});
-													break;
-											}
+									} else {
+										switch (config[i]._type) {
+										case 'object':
+											result.push({
+												title : i,
+												_config : config[i],
+												items : buildTree(config[i])
+											});
+											break;
+										case 'array':
+											result.push({
+												title : i,
+												canAdd : true,
+												_config : config[i],
+												items : []
+											});
+											break;
+										default:
+											result.push({
+												title : i,
+												_config : config[i]
+											});
+											break;
 										}
 									}
-									break;
-								case 'array' :
-									for ( var i in data) {
-										var d = data[i];
-										var temp = buildTree(config._item, d);
-										switch (config._item._type) {
-											case 'object' :
-												result.push({
-													title : '{..}',
-													_config : config._item,
-													items : temp
-												});
-												break;
-											case 'array' :
-												result.push({
-													title : '[..]',
-													_config : config._item,
-													items : temp
-												});
-												break;
-											default :
-												result.push(temp[0]);
-												break;
-										}
-										result[result.length - 1].canBeDeleted = true;
+								}
+								break;
+							case 'array':
+								for ( var i in data) {
+									var d = data[i];
+									var temp = buildTree(config._item, d);
+									switch (config._item._type) {
+									case 'object':
+										result.push({
+											title : '{..}',
+											_config : config._item,
+											items : temp
+										});
+										break;
+									case 'array':
+										result.push({
+											title : '[..]',
+											_config : config._item,
+											items : temp
+										});
+										break;
+									default:
+										result.push(temp[0]);
+										break;
 									}
-									break;
-								default :
-									result.push({
-										value : data,
-										_config : config
-									});
-									break;
+									result[result.length - 1].canBeDeleted = true;
+								}
+								break;
+							default:
+								result.push({
+									value : data,
+									_config : config
+								});
+								break;
 							}
 							return result;
 						}
@@ -761,8 +765,6 @@
 							dragEnabled : false,
 							emptyPlaceholderEnabled : false,
 							maxDepth : 10,
-							dragDelay : 0,
-							dragDistance : 0,
 							lockX : false,
 							lockY : false,
 							boundTo : '',
@@ -771,7 +773,7 @@
 							cancelKey : 'esc',
 							copyKey : 'shift',
 							selectKey : 'ctrl',
-							enableExpandOnHover : true,
+							enableExpandOnHover : false,
 							expandOnHover : 500,
 						};
 
@@ -792,46 +794,45 @@
 						$scope.newSubItem = function(scope) {
 							var nodeData = scope.$modelValue;
 							switch (nodeData._config._item._type) {
-								case 'object' :
-									nodeData.items.push({
-										title : '{..}',
-										_config : nodeData._config._item,
-										items : buildTree(nodeData._config._item)
-									});
-									break;
-								case 'array' :
-									nodeData.items.push({
-										title : '[..]',
-										_config : nodeData._config._item,
-										items : buildTree(nodeData._config._item)
-									});
-									break;
-								default :
-									nodeData.items.push({
-										title : '[..]',
-										_config : nodeData._config._item,
-										items : buildTree(nodeData._config._item)[0]
-									});
-									break;
+							case 'object':
+								nodeData.items.unshift({
+									title : '{..}',
+									_config : nodeData._config._item,
+									items : buildTree(nodeData._config._item)
+								});
+								break;
+							case 'array':
+								nodeData.items.unshift({
+									title : '[..]',
+									_config : nodeData._config._item,
+									items : buildTree(nodeData._config._item)
+								});
+								break;
+							default:
+								nodeData.items.unshift({
+									_config : nodeData._config._item,
+									value : ''
+								});
+								break;
 							}
-							nodeData.items[nodeData.items.length - 1].canBeDeleted = true;
+							nodeData.items[0].canBeDeleted = true;
 						};
 						function toJson(node) {
 							switch (node._config._type) {
-								case 'object' :
-									var result = {};
-									for ( var i in node.items) {
-										result[node.items[i].title] = toJson(node.items[i]);
-									}
-									return result;
-								case 'array' :
-									var result = [];
-									for ( var i in node.items) {
-										result.push(toJson(node.items[i]));
-									}
-									return result;
-								default :
-									return node.value;
+							case 'object':
+								var result = {};
+								for ( var i in node.items) {
+									result[node.items[i].title] = toJson(node.items[i]);
+								}
+								return result;
+							case 'array':
+								var result = [];
+								for ( var i in node.items) {
+									result.push(toJson(node.items[i]));
+								}
+								return result;
+							default:
+								return node.value;
 							}
 						}
 						$scope.getConfig = function() {

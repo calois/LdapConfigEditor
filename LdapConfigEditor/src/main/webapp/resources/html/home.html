@@ -8,25 +8,28 @@
 					<!-- Nested list template -->
 					<script type="text/ng-template" id="items_renderer.html">
 <div ui-tree-handle>
-	<a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)"
-		ng-hide="item._config._type!='array'&&item._config._type!='object'">
-		<span class="glyphicon"
-		ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }"></span>
-	</a> <span
-		ng-hide="item._config._type!='array'&&item._config._type!='object'">{{item.title}}</span>
-	<span class="row"
-		ng-show="item._config._type!='array'&&item._config._type!='object'"
-		style='margin: 0;'> <label class="col-sm-3 control-label">{{item.title}}</label>
-		<div class="col-sm-9">
+	<div ng-hide="item._config._type!='array'&&item._config._type!='object'">
+		<a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)">
+			<span class="glyphicon"	ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }"></span>
+		</a> 
+		<span>{{item.title}}</span>
+		<a class="pull-right btn btn-danger btn-xs" nodrag	ng-click="remove(this)" ng-show="item.canBeDeleted">
+			<span class="glyphicon glyphicon-remove"></span>
+		</a>
+		<a class="pull-right btn btn-primary btn-xs" nodrag	ng-click="newSubItem(this)" style="margin-right: 8px;"	ng-show="item.canAdd">
+			<span class="glyphicon glyphicon-plus"></span>
+		</a>
+	</div>
+	<span class="row" ng-show="item._config._type!='array'&&item._config._type!='object'"
+		style='margin: 0;'>
+		<label class="col-sm-3 control-label">{{item.title}}</label>
+		<span class="col-sm-8">
 			<input ng-model="item.value" class="form-control" />
-		</div>
-	</span> <a class="pull-right btn btn-danger btn-xs" nodrag
-		ng-click="remove(this)" ng-show="item.canBeDeleted"> <span
-		class="glyphicon glyphicon-remove"></span>
-	</a> <a class="pull-right btn btn-primary btn-xs" nodrag
-		ng-click="newSubItem(this)" style="margin-right: 8px;"
-		ng-show="item.canAdd"> <span class="glyphicon glyphicon-plus"></span>
-	</a>
+		</span>
+		<a class="pull-right btn btn-danger btn-xs" nodrag	ng-click="remove(this)" ng-show="item.canBeDeleted">
+			<span class="glyphicon glyphicon-remove"></span>
+		</a>
+	</span>
 </div>
 <ol ui-tree-nodes ng-model="item.items"
 	ng-class="{ 'hidden': collapsed }">
@@ -35,19 +38,12 @@
 		ng-include="'items_renderer.html'"></li>
 </ol>
               		</script>
-					<ui-tree callbacks="callbacks" class="form-horizontal"
-						drag-enabled="parameters.dragEnabled"
-						empty-placeholder-enabled="parameters.emptyPlaceholderEnabled"
-						max-depth="parameters.maxDepth" drag-delay="parameters.dragDelay"
-						drag-distance="parameters.dragDistance" lock-x="parameters.lockX"
-						lock-y="parameters.lockY" bound-to="parameters.boundTo"
-						spacing="parameters.spacing" coverage="parameters.coverage"
-						cancel-key="parameters.cancelKey" copy-key="parameters.copyKey"
-						select-key="parameters.selectKey"
-						expand-on-hover="(parameters.enableExpandOnHover) ? parameters.expandOnHover : parameters.enableExpandOnHover">
+					<ui-tree class="form-horizontal" drag-enabled="false"
+						empty-placeholder-enabled="false"
+						drag-distance="parameters.dragDistance" lock-x="true"
+						lock-y="true">
 					<ol ui-tree-nodes ng-model="list">
 						<li ng-repeat="item in list" ui-tree-node
-							ng-class="{ 'selected': selected, 'original': original }"
 							ng-include="'items_renderer.html'"></li>
 					</ol>
 					</ui-tree>
