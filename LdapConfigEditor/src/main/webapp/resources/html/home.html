@@ -25,13 +25,14 @@
 		style='margin: 0;'>
 		<label class="col-sm-3 control-label">{{item.title}}</label>
 		<span class="col-sm-8">
-			<input ng-if="item._config._type=='string'" type="text" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required" />
+			<input ng-if="item._config._type=='string'" type="text" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required" ng-change="item._config._change(item)" />
 			<input ng-if="item._config._type=='email'" type="email" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required"/>
 			<select ng-if="item._config._type=='boolean'" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required" >
 				<option></option>
 				<option>true</option>
 				<option>false</option>
 			</select>
+			<textarea ng-if="item._config._type=='text'" rows="3" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required"></textarea>
 		</span>
 		<a class="pull-right btn btn-danger btn-xs" nodrag	ng-click="remove(this)" ng-show="item.canBeDeleted">
 			<span class="glyphicon glyphicon-remove"></span>

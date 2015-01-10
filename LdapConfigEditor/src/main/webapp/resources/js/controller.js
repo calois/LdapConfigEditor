@@ -25,7 +25,21 @@
 									_type : 'object',
 									code : {
 										_type : 'string',
-										_required : true
+										_required : true,
+										_change : function(item) {
+											var market = getMarket(item.value);
+											if (!market) {
+												return;
+											}
+											var parent = item._parent;
+											for (var i = 0; i < parent.items.length; i++) {
+												if (parent.items[i].title == 'name') {
+													parent.items[i].value = market.name;
+												} else if (parent.items[i].title == 'img') {
+													parent.items[i].value = market.img;
+												}
+											}
+										}
 									},
 									name : {
 										_type : 'string'
@@ -37,7 +51,7 @@
 										_type : 'email'
 									},
 									config : {
-										_type : 'string'
+										_type : 'text'
 									},
 									skipAddIfExist : {
 										_type : 'boolean'
@@ -793,6 +807,18 @@
 
 						$scope.list = buildTree($scope.config, $scope.data);
 
+						function buildParent(node, parent) {
+							node._parent = parent;
+							if (node.items) {
+								for ( var i in node.items) {
+									buildParent(node.items[i], node);
+								}
+							}
+						}
+						for (var i = 0; i < $scope.list.length; i++) {
+							buildParent($scope.list[i]);
+						}
+
 						$scope.callbacks = {};
 
 						$scope.remove = function(scope) {
@@ -828,6 +854,7 @@
 								break;
 							}
 							nodeData.items[0].canBeDeleted = true;
+							buildParent(nodeData.items[0], nodeData);
 						};
 						function toJson(node) {
 							switch (node._config._type) {
