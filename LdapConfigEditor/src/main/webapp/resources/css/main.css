@@ -1,0 +1,14 @@
+.form-validation .ng-valid.ng-dirty {
+  border-color: #A3BE8C; }
+
+.form-validation .ng-invalid.ng-dirty {
+  border-color: #BF616A; }
+
+/**Required Field**/
+.form-group.required .control-label:after {
+	position: absolute;
+	content: '*';
+	right: 0;
+	color: red;
+	top: 5px;
+}

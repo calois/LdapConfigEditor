@@ -1,12 +1,13 @@
 <div class="panel">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row" id="boundary">
-				<div class="col-lg-6">
-					<h4>Draggable Tree</h4>
-
-					<!-- Nested list template -->
-					<script type="text/ng-template" id="items_renderer.html">
+	<form role="form" class="form-horizontal panel-body form-validation"
+		ng-submit="submit()" gfa-msg="errors">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row" id="boundary">
+					<div class="col-lg-6">
+						<h4>Draggable Tree</h4>
+						<!-- Nested list template -->
+						<script type="text/ng-template" id="items_renderer.html">
 <div ui-tree-handle>
 	<div ng-hide="item._config._type!='array'&&item._config._type!='object'">
 		<a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)">
@@ -24,9 +25,9 @@
 		style='margin: 0;'>
 		<label class="col-sm-3 control-label">{{item.title}}</label>
 		<span class="col-sm-8">
-			<input ng-if="item._config._type=='string'" type="text" ng-model="item.value" class="form-control" />
-			<input ng-if="item._config._type=='email'" type="email" ng-model="item.value" class="form-control" />
-			<select ng-if="item._config._type=='boolean'" ng-model="item.value" class="form-control">
+			<input ng-if="item._config._type=='string'" type="text" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required" />
+			<input ng-if="item._config._type=='email'" type="email" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required"/>
+			<select ng-if="item._config._type=='boolean'" ng-model="item.value" class="form-control" nas-error nas-required="item._config._required" >
 				<option></option>
 				<option>true</option>
 				<option>false</option>
@@ -44,22 +45,23 @@
 		ng-include="'items_renderer.html'"></li>
 </ol>
               		</script>
-					<ui-tree class="form-horizontal" drag-enabled="false"
-						empty-placeholder-enabled="false"
-						drag-distance="parameters.dragDistance" lock-x="true"
-						lock-y="true">
-					<ol ui-tree-nodes ng-model="list">
-						<li ng-repeat="item in list" ui-tree-node
-							ng-include="'items_renderer.html'"></li>
-					</ol>
-					</ui-tree>
-				</div>
-				<div class="col-lg-6">
-					<h4>Full tree</h4>
-					<pre class="code">{{ getConfig() | json }}</pre>
+						<ui-tree class="form-horizontal" drag-enabled="false"
+							empty-placeholder-enabled="false"
+							drag-distance="parameters.dragDistance" lock-x="true"
+							lock-y="true">
+						<ol ui-tree-nodes ng-model="list">
+							<li ng-repeat="item in list" ui-tree-node
+								ng-include="'items_renderer.html'"></li>
+						</ol>
+						</ui-tree>
+					</div>
+					<div class="col-lg-6">
+						<h4>Full tree</h4>
+						<pre class="code">{{ getConfig() | json }}</pre>
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
+		</div>
+	</form>
 </div>

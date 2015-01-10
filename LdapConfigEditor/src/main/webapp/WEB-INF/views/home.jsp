@@ -19,9 +19,11 @@
         <n:css src="/resources/css/vendor/bootstrap-theme.css"/>
         <n:css src="/resources/css/vendor/angular-ui-tree.min.css"/>
         <n:css src="/resources/css/vendor/demo.css"/>
+        <n:css src="/resources/css/vendor/jquery.qtip.css"/>
         <n:css src="/resources/css/main.css"/>
 		<n:js src="/resources/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"/>
 		<n:js src="/resources/js/vendor/jquery-1.11.1.js"/>
+		<n:js src="/resources/js/vendor/jquery.qtip.js"/>
 		<n:js src="/resources/js/vendor/bootstrap.js"/>
 		<n:js src="/resources/js/vendor/angular.js"/>
 		<n:js src="/resources/js/vendor/angular-resource.js"/>

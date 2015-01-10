@@ -6,6 +6,17 @@
 			.controller(
 					'HomeCtrl',
 					function($scope, $timeout, keys) {
+						var markets = {
+							asx : {
+								name : 'Australian Stock Exchange',
+								img : '//AU04OFFFS01/SMARTS-QA-Support/Automation-Test-Data/LDAP-Config/markets/asx.png'
+							}
+						};
+						function getMarket(code) {
+							if (code in markets) {
+								return markets[code];
+							}
+						}
 						$scope.config = {
 							_type : 'object',
 							markets : {
@@ -13,7 +24,8 @@
 								_item : {
 									_type : 'object',
 									code : {
-										_type : 'string'
+										_type : 'string',
+										_required : true
 									},
 									name : {
 										_type : 'string'
