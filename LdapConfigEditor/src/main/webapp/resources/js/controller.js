@@ -2,7 +2,7 @@
 	'use strict';
 	app.controller('SiteCtrl', function($scope) {
 	});
-	app.controller('HomeCtrl', function($scope, $timeout, keys, $modal, $http, logger) {
+	app.controller('HomeCtrl', function($scope, $timeout, keys, $modal, $http, logger, $window) {
 		var markets = {
 			asx : {
 				name : 'Australian Stock Exchange',
@@ -737,6 +737,31 @@
 		};
 		$scope.showCopy = function() {
 			logger.success("Copied to clipboard!");
+		};
+		function open(verb, url, data, target) {
+			var form = document.createElement("form");
+			form.action = url;
+			form.method = verb;
+			form.target = target || "_self";
+			if (data) {
+				for ( var key in data) {
+					var input = document.createElement("textarea");
+					input.name = key;
+					input.value = typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key];
+					form.appendChild(input);
+				}
+			}
+			form.style.display = 'none';
+			document.body.appendChild(form);
+			form.submit();
+		};
+		$scope.download = function() {
+			/*$window.open(utils.getUrl("/config.json", {
+				json : $scope.result
+			}), "_blank");*/
+			open('POST', utils.getUrl("/config.json"), {
+				json : $scope.result
+			}, '_blank');
 		};
 	});
 })();
