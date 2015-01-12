@@ -2,7 +2,7 @@
 	'use strict';
 	app.controller('SiteCtrl', function($scope) {
 	});
-	app.controller('HomeCtrl', function($scope, $timeout, keys, $modal, $http) {
+	app.controller('HomeCtrl', function($scope, $timeout, keys, $modal, $http, logger) {
 		var markets = {
 			asx : {
 				name : 'Australian Stock Exchange',
@@ -727,12 +727,16 @@
 					return node.value;
 			}
 		}
+		$scope.result = {};
 		$scope.getConfig = function() {
 			var result = {};
 			angular.forEach($scope.list, function(node) {
 				result[node.title] = toJson(node);
 			});
 			return result;
+		};
+		$scope.showCopy = function() {
+			logger.success("Copied to clipboard!");
 		};
 	});
 })();

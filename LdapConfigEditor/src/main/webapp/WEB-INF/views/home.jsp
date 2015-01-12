@@ -20,10 +20,12 @@
         <n:css src="/resources/css/vendor/angular-ui-tree.min.css"/>
         <n:css src="/resources/css/vendor/demo.css"/>
         <n:css src="/resources/css/vendor/jquery.qtip.css"/>
+        <n:css src="/resources/css/vendor/toastr.css"/>
         <n:css src="/resources/css/main.css"/>
 		<n:js src="/resources/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"/>
 		<n:js src="/resources/js/vendor/jquery-1.11.1.js"/>
 		<n:js src="/resources/js/vendor/jquery.qtip.js"/>
+		<n:js src="/resources/js/vendor/ZeroClipboard.js"/>
 		<n:js src="/resources/js/vendor/bootstrap.js"/>
 		<n:js src="/resources/js/vendor/angular.js"/>
 		<n:js src="/resources/js/vendor/angular-resource.js"/>
@@ -33,6 +35,7 @@
 		<n:js src="/resources/js/vendor/angular-route.js"/>
 		<n:js src="/resources/js/vendor/angular-ui-router.js"/>
 		<n:js src="/resources/js/vendor/angular-ui-tree.js"/>
+		<n:js src="/resources/js/vendor/ngClip.js"/>
 		<n:js src="/resources/js/vendor/loading-bar.js"/>
 		<n:js src="/resources/js/vendor/toastr.js"/>
 		<n:js src="/resources/js/vendor/ui-bootstrap-tpls-0.12.0.js"/>
