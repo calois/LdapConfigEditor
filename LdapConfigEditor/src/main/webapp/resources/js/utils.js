@@ -31,11 +31,9 @@
 		},
 		getUuid : function() {
 			function s4() {
-				return Math.floor((1 + Math.random()) * 0x10000).toString(16)
-						.substring(1);
+				return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 			}
-			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-'
-					+ s4() + s4() + s4();
+			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		},
 		group : function(array, size) {
 			var groups = [];
@@ -70,72 +68,64 @@
 		},
 		getMsg : function(key) {
 			switch (key) {
-			case 'email':
-				return 'Invalid email!';
-			case 'nasRequired':
-				return 'Required!'
-			default:
-				break;
+				case 'email' :
+					return 'Invalid email!';
+				case 'nasRequired' :
+					return 'Required!'
+				default :
+					break;
 			}
 			return key;
 		}
 	};
-	$(window).scroll(
-			function() {
-				if ($(window).scrollTop() + $(window).height() == $(document)
-						.height()
-						&& !utils.isInBottom) {
-					if (utils.stbListerners) {
-						for ( var i in utils.stbListerners) {
-							utils.stbListerners[i]();
-						}
-					}
-					utils.isInBottom = true;
-				} else if (utils.isInBottom
-						&& $(document).height() - $(window).scrollTop()
-								- $(window).height() > 150) {
-					utils.isInBottom = false;
+	$(window).scroll(function() {
+		if ($(window).scrollTop() + $(window).height() == $(document).height() && !utils.isInBottom) {
+			if (utils.stbListerners) {
+				for ( var i in utils.stbListerners) {
+					utils.stbListerners[i]();
 				}
-			});
+			}
+			utils.isInBottom = true;
+		} else if (utils.isInBottom && $(document).height() - $(window).scrollTop() - $(window).height() > 150) {
+			utils.isInBottom = false;
+		}
+	});
 	jQuery.fn.extend({
 		showMsg : function(msgs) {
 			this.clearMsg();
 			return this.each(function(index) {
 				if (!msgs) {
-					errors = [ {
+					errors = [{
 						code : 'N/A',
 						message : '未知错误',
 						level : 'error',
 						system : 'CORE'
-					} ];
+					}];
 				}
 				if (jQuery.isPlainObject(msgs)) {
-					msgs = [ msgs ];
+					msgs = [msgs];
 				}
 				for ( var i in msgs) {
 					var msg = msgs[i];
-					var text = '[' + msg.system + '.'
-							+ (msg.code ? msg.code : 'N/A') + '] '
-							+ msg.message;
+					var text = '[' + msg.system + '.' + (msg.code ? msg.code : 'N/A') + '] ' + msg.message;
 					var msgClassName = 'alert ';
 					switch (msg.level) {
-					default:
-					case 'ERROR':
-					case 'FATAL':
-						msgClassName += 'alert-danger';
-						break;
-					case 'WARNING':
-						msgClassName += 'alert-warning';
-						break;
-					case 'INFO':
-						msgClassName += 'alert-info';
-						break;
-					case 'SUCCESS':
-						msgClassName += 'alert-success';
-						break;
+						default :
+						case 'ERROR' :
+						case 'FATAL' :
+							msgClassName += 'alert-danger';
+							break;
+						case 'WARNING' :
+							msgClassName += 'alert-warning';
+							break;
+						case 'INFO' :
+							msgClassName += 'alert-info';
+							break;
+						case 'SUCCESS' :
+							msgClassName += 'alert-success';
+							break;
 					}
-					var msgText = '<div msg="true" class="' + msgClassName
-							+ '">' + text + '</div>';
+					var msgText = '<div msg="true" class="' + msgClassName + '">' + text + '</div>';
 					var message = $(msgText).prependTo($(this));
 					if (msg.level == 'SUCCESS') {
 						setTimeout(function() {
@@ -155,7 +145,7 @@
 // Directives
 (function() {
 	'use strict';
-	angular.module('utils', [ 'ui.bootstrap' ]);
+	angular.module('utils', ['ui.bootstrap']);
 	angular.module('utils').directive("required", function() {
 		return {
 			link : function(scope, element, attrs) {
@@ -212,54 +202,47 @@
 			});
 		};
 	});
-	angular.module('utils').directive(
-			"nasPercent",
-			function($parse) {
-				return {
-					require : "?ngModel",
-					link : function(scope, element, attrs) {
-						function format(value) {
-							if (!value) {
-								value = element.val();
-							}
-							if (value && value != '') {
-								var newValue = scope.$eval('"' + value
-										+ '"|currency:""')
-										+ '%';
-								if (newValue == '%' && value != '') {
-									var getter = $parse(attrs.ngModel);
-									var setter = getter.assign;
-									setter(scope, '');
-									element.val('');
-								} else {
-									element.val(newValue);
-								}
-							}
+	angular.module('utils').directive("nasPercent", function($parse) {
+		return {
+			require : "?ngModel",
+			link : function(scope, element, attrs) {
+				function format(value) {
+					if (!value) {
+						value = element.val();
+					}
+					if (value && value != '') {
+						var newValue = scope.$eval('"' + value + '"|currency:""') + '%';
+						if (newValue == '%' && value != '') {
+							var getter = $parse(attrs.ngModel);
+							var setter = getter.assign;
+							setter(scope, '');
+							element.val('');
+						} else {
+							element.val(newValue);
 						}
-						function clear() {
-							element.val(element.val().replace(/[%,]/g, ''));
-						}
-						scope
-								.$watch(attrs.ngModel,
-										function(newValue, oldValue) {
-											if (newValue !== undefined
-													&& !scope.focus) {
-												format(newValue);
-											}
-										});
-						element.addClass('text-right');
-						element.on('blur', function() {
-							format();
-							scope.focus = false;
-						});
-						element.on('focus', function() {
-							clear();
-							scope.focus = true;
-						});
-					},
-					restrict : "A"
-				};
-			});
+					}
+				}
+				function clear() {
+					element.val(element.val().replace(/[%,]/g, ''));
+				}
+				scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+					if (newValue !== undefined && !scope.focus) {
+						format(newValue);
+					}
+				});
+				element.addClass('text-right');
+				element.on('blur', function() {
+					format();
+					scope.focus = false;
+				});
+				element.on('focus', function() {
+					clear();
+					scope.focus = true;
+				});
+			},
+			restrict : "A"
+		};
+	});
 	angular.module('utils').directive("nasDollar", function($parse) {
 		return {
 			require : "?ngModel",
@@ -304,16 +287,11 @@
 								$(element)
 										.scroll(
 												function() {
-													if ($(this).scrollTop()
-															+ $(this)
-																	.innerHeight() >= this.scrollHeight
+													if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight
 															&& scope.atTheButtom == false) {
 														scope.atTheButtom = true;
 														scope.nasScroll.more();
-													} else if ($(this)
-															.scrollTop()
-															+ $(this)
-																	.innerHeight() <= (this.scrollHeight - 20)) {
+													} else if ($(this).scrollTop() + $(this).innerHeight() <= (this.scrollHeight - 20)) {
 														scope.atTheButtom = false;
 													}
 												});
@@ -324,26 +302,21 @@
 							restrict : "A"
 						};
 					});
-	angular
-			.module('utils')
-			.directive(
-					"nasOnLoading",
-					function() {
-						return {
-							link : function(scope, element, attrs) {
-								var loading = $('<div class="center-block loading">&nbsp;</div>');
-								scope.$watch(attrs.nasOnLoading,
-										function(value) {
-											if (value) {
-												element.append(loading);
-											} else {
-												loading.remove();
-											}
-										});
-							},
-							restrict : "A"
-						};
-					});
+	angular.module('utils').directive("nasOnLoading", function() {
+		return {
+			link : function(scope, element, attrs) {
+				var loading = $('<div class="center-block loading">&nbsp;</div>');
+				scope.$watch(attrs.nasOnLoading, function(value) {
+					if (value) {
+						element.append(loading);
+					} else {
+						loading.remove();
+					}
+				});
+			},
+			restrict : "A"
+		};
+	});
 	angular.module('utils').directive("nasSortGrid", function() {
 		return {
 			link : function(scope, element, attrs) {
@@ -358,10 +331,10 @@
 							sorters[i].$digest();
 						}
 					}
-					$scope.sort(angular.toJson([ {
+					$scope.sort(angular.toJson([{
 						property : scope.property,
 						direction : scope.direction == 0 ? 'ASC' : 'DESC'
-					} ]));
+					}]));
 				};
 				this.register = function(scope) {
 					sorters.push(scope);
@@ -383,16 +356,12 @@
 							link : function(scope, element, attrs, nasSortGrid) {
 								nasSortGrid.register(scope);
 								scope.direction = -1;
-								element
-										.on(
-												'click',
-												function() {
-													scope
-															.$apply(function() {
-																scope.direction = (scope.direction + 1) % 2;
-															});
-													nasSortGrid.sort(scope);
-												});
+								element.on('click', function() {
+									scope.$apply(function() {
+										scope.direction = (scope.direction + 1) % 2;
+									});
+									nasSortGrid.sort(scope);
+								});
 							},
 							scope : {
 								property : '@nasSortColumn'
@@ -503,29 +472,22 @@
 			restrict : "A"
 		};
 	});
-	angular
-			.module('utils')
-			.directive(
-					"nasSameAs",
-					function($parse) {
-						return {
-							require : 'ngModel',
-							link : function(scope, elem, attr, ngModel) {
-								var target = attr.nasSameAs;
-								var errorCode = attr.nasSameAsErrorCode ? attr.nasSameAsErrorCode
-										: 'same';
-								var getter = $parse(target);
-								scope.$watch(target, function(value) {
-									ngModel.$setValidity(errorCode,
-											value == ngModel.$modelValue);
-								});
-								ngModel.$validators[errorCode] = function(
-										modelValue, viewValue) {
-									return getter(scope) == modelValue;
-								};
-							}
-						};
-					});
+	angular.module('utils').directive("nasSameAs", function($parse) {
+		return {
+			require : 'ngModel',
+			link : function(scope, elem, attr, ngModel) {
+				var target = attr.nasSameAs;
+				var errorCode = attr.nasSameAsErrorCode ? attr.nasSameAsErrorCode : 'same';
+				var getter = $parse(target);
+				scope.$watch(target, function(value) {
+					ngModel.$setValidity(errorCode, value == ngModel.$modelValue);
+				});
+				ngModel.$validators[errorCode] = function(modelValue, viewValue) {
+					return getter(scope) == modelValue;
+				};
+			}
+		};
+	});
 	angular.module('utils').directive("nasError", function($parse) {
 		return {
 			require : 'ngModel',
@@ -559,33 +521,32 @@
 						});
 					}
 				}
-				scope.$watchGroup([ function() {
+				scope.$watchGroup([function() {
 					return ngModel.$valid;
 				}, function() {
 					return ngModel.$viewValue;
-				} ], showError);
+				}], showError);
 			}
 		};
 	});
-	angular.module('utils').directive(
-			"nasRequired",
-			function($parse) {
-				return {
-					require : 'ngModel',
-					link : function(scope, elem, attr, ngModel) {
-						var getter = $parse(attr['nasRequired']);
-						var required = getter(scope);
-						if (required) {
-							elem.closest('.form-group').addClass('required');
-						}
-						ngModel.$validators.nasRequired = function(modelValue,
-								viewValue) {
-							var value = modelValue || viewValue;
-							return (value + '').length != 0;
-						};
-					}
+	angular.module('utils').directive("nasRequired", function($parse) {
+		return {
+			require : 'ngModel',
+			link : function(scope, elem, attr, ngModel) {
+				var getter = $parse(attr['nasRequired']);
+				var required = getter(scope);
+				if (required) {
+					elem.closest('.form-group').addClass('required');
+				} else {
+					return;
+				}
+				ngModel.$validators.nasRequired = function(modelValue, viewValue) {
+					var value = modelValue || viewValue;
+					return (value + '').length != 0;
 				};
-			});
+			}
+		};
+	});
 })();
 // Filter
 (function() {
@@ -650,55 +611,48 @@
 // Provider
 (function() {
 	'use strict';
-	angular
-			.module('utils')
-			.provider(
-					'confirm',
-					function() {
-						return {
-							$get : function($modal) {
-								return {
-									open : function(title, message, ok, cancel) {
-										var modalInstance = $modal
-												.open({
-													templateUrl : utils
-															.getUrl('/resources/html/confirm.html'),
-													controller : 'ConfirmCtrl',
-													size : 400,
-													resolve : {
-														title : function() {
-															return title;
-														},
-														message : function() {
-															return message;
-														}
-													}
-												});
-										modalInstance.result.then(function() {
-											if (ok) {
-												ok();
-											}
-										}, function() {
-											if (cancel) {
-												cancel();
-											}
-										});
-										return modalInstance;
-									}
-								};
+	angular.module('utils').provider('confirm', function() {
+		return {
+			$get : function($modal) {
+				return {
+					open : function(title, message, ok, cancel) {
+						var modalInstance = $modal.open({
+							templateUrl : utils.getUrl('/resources/html/confirm.html'),
+							controller : 'ConfirmCtrl',
+							size : 400,
+							resolve : {
+								title : function() {
+									return title;
+								},
+								message : function() {
+									return message;
+								}
 							}
-						};
-					}).controller('ConfirmCtrl',
-					function($scope, $modalInstance, title, message) {
-						$scope.title = title;
-						$scope.message = message;
-						$scope.ok = function() {
-							$modalInstance.close();
-						};
-						$scope.cancel = function() {
-							$modalInstance.dismiss();
-						};
-					});
+						});
+						modalInstance.result.then(function() {
+							if (ok) {
+								ok();
+							}
+						}, function() {
+							if (cancel) {
+								cancel();
+							}
+						});
+						return modalInstance;
+					}
+				};
+			}
+		};
+	}).controller('ConfirmCtrl', function($scope, $modalInstance, title, message) {
+		$scope.title = title;
+		$scope.message = message;
+		$scope.ok = function() {
+			$modalInstance.close();
+		};
+		$scope.cancel = function() {
+			$modalInstance.dismiss();
+		};
+	});
 	// Group
 	function GroupManager(itemsNoPerGroup) {
 		this.itemsNoPerGroup = itemsNoPerGroup;
@@ -706,12 +660,11 @@
 	}
 	GroupManager.prototype.add = function(items) {
 		if (!angular.isArray(items)) {
-			items = [ items ];
+			items = [items];
 		}
 		if (this.groups.length != 0) {
 			var currentGroup = this.groups[this.groups.length - 1];
-			while (currentGroup.length < this.itemsNoPerGroup
-					&& items.length != 0) {
+			while (currentGroup.length < this.itemsNoPerGroup && items.length != 0) {
 				currentGroup.push(items.shift());
 			}
 		}
@@ -742,137 +695,117 @@
 			}
 		};
 	});
-	angular
-			.module('utils')
-			.provider(
-					'$infinityPaging',
-					function() {
-						var DEFAULT_MAX = 30;
-						var DEFAULT_NO = 1;
-						return {
-							$get : function($http) {
-								// Infinity Paging
-								function InfinityPagingResource(config) {
-									config = config || {};
-									this.callBacks = {};
-									this.url = config.url;
-									this.max = config.max || DEFAULT_MAX;
-									this.params = config.params || {};
-									this.no = DEFAULT_NO;
-									this.loading = false;
-									this.hasMore = true;
-								}
-								InfinityPagingResource.prototype.more = function(
-										reset) {
-									if (!this.hasMore) {
-										return;
-									}
-									this.loading = true;
-									var me = this;
-									me.fire('beforeLoad');
-									var params = {
-										max : this.max,
-										no : this.no
-									};
-									angular.extend(params, this.params);
-									$http
-											.get(this.url, {
-												params : params
-											})
-											.success(
-													function(data) {
-														if (reset) {
-															me.fire('init');
-														}
-														me.loading = false;
-														me
-																.fire(
-																		'load',
-																		data.contentList
-																				|| []);
-														me.no++;
-														if (data.totalPages >= me.no) {
-															me.hasMore = true;
-														} else {
-															me.hasMore = false;
-														}
-														me.fire('afterLoad');
-													}).error(function(data) {
-												me.fire('error', data);
-												me.loading = false;
-												me.fire('afterLoad');
-											});
-								};
-								InfinityPagingResource.prototype.refresh = function(
-										params) {
-									var me = this;
-									for ( var i in params) {
-										if (params[i] === undefined) {
-											delete params[i];
-										}
-									}
-									angular.extend(this.params, params);
-									this.no = DEFAULT_NO;
-									this.loading = false;
-									this.hasMore = true;
-									this.fire('init');
-									this.more(true);
-									/*
-									 * function callBack() { if (me.hasMore &&
-									 * me.container &&
-									 * (me.container.innerHeight() ==
-									 * me.container .get()[0].scrollHeight)) {
-									 * me.more(); } else { me.un('afterLoad',
-									 * callBack); } } me.on('afterLoad',
-									 * callBack);
-									 */
-								};
-								InfinityPagingResource.prototype.setContainer = function(
-										container) {
-									this.container = container;
-								};
-								InfinityPagingResource.prototype.on = function(
-										name, callBack) {
-									if (!this.callBacks[name]) {
-										this.callBacks[name] = $.Callbacks();
-									}
-									this.callBacks[name].add(callBack);
-								};
-								InfinityPagingResource.prototype.un = function(
-										name, callBack) {
-									if (!this.callBacks[name]) {
-										return;
-									}
-									this.callBacks[name].remove(callBack);
-								};
-								InfinityPagingResource.prototype.fire = function(
-										name, data) {
-									if (!this.callBacks[name]) {
-										return;
-									}
-									this.callBacks[name].fire(data);
-								};
-
-								return {
-									create : function(config) {
-										return new InfinityPagingResource(
-												config);
-									},
-									createWin : function(config) {
-										var resource = new InfinityPagingResource(
-												config);
-										resource.setContainer($(window));
-										utils.onScrollToBottom(
-												'infinityScroll', function() {
-													resource.more();
-												});
-										return resource;
-									}
-								};
-							}
-						};
+	angular.module('utils').provider('$infinityPaging', function() {
+		var DEFAULT_MAX = 30;
+		var DEFAULT_NO = 1;
+		return {
+			$get : function($http) {
+				// Infinity Paging
+				function InfinityPagingResource(config) {
+					config = config || {};
+					this.callBacks = {};
+					this.url = config.url;
+					this.max = config.max || DEFAULT_MAX;
+					this.params = config.params || {};
+					this.no = DEFAULT_NO;
+					this.loading = false;
+					this.hasMore = true;
+				}
+				InfinityPagingResource.prototype.more = function(reset) {
+					if (!this.hasMore) {
+						return;
+					}
+					this.loading = true;
+					var me = this;
+					me.fire('beforeLoad');
+					var params = {
+						max : this.max,
+						no : this.no
+					};
+					angular.extend(params, this.params);
+					$http.get(this.url, {
+						params : params
+					}).success(function(data) {
+						if (reset) {
+							me.fire('init');
+						}
+						me.loading = false;
+						me.fire('load', data.contentList || []);
+						me.no++;
+						if (data.totalPages >= me.no) {
+							me.hasMore = true;
+						} else {
+							me.hasMore = false;
+						}
+						me.fire('afterLoad');
+					}).error(function(data) {
+						me.fire('error', data);
+						me.loading = false;
+						me.fire('afterLoad');
 					});
-	angular.module('utils').factory('logger', [ function() {
+				};
+				InfinityPagingResource.prototype.refresh = function(params) {
+					var me = this;
+					for ( var i in params) {
+						if (params[i] === undefined) {
+							delete params[i];
+						}
+					}
+					angular.extend(this.params, params);
+					this.no = DEFAULT_NO;
+					this.loading = false;
+					this.hasMore = true;
+					this.fire('init');
+					this.more(true);
+					/*
+					 * function callBack() { if (me.hasMore &&
+					 * me.container &&
+					 * (me.container.innerHeight() ==
+					 * me.container .get()[0].scrollHeight)) {
+					 * me.more(); } else { me.un('afterLoad',
+					 * callBack); } } me.on('afterLoad',
+					 * callBack);
+					 */
+				};
+				InfinityPagingResource.prototype.setContainer = function(container) {
+					this.container = container;
+				};
+				InfinityPagingResource.prototype.on = function(name, callBack) {
+					if (!this.callBacks[name]) {
+						this.callBacks[name] = $.Callbacks();
+					}
+					this.callBacks[name].add(callBack);
+				};
+				InfinityPagingResource.prototype.un = function(name, callBack) {
+					if (!this.callBacks[name]) {
+						return;
+					}
+					this.callBacks[name].remove(callBack);
+				};
+				InfinityPagingResource.prototype.fire = function(name, data) {
+					if (!this.callBacks[name]) {
+						return;
+					}
+					this.callBacks[name].fire(data);
+				};
+
+				return {
+					create : function(config) {
+						return new InfinityPagingResource(config);
+					},
+					createWin : function(config) {
+						var resource = new InfinityPagingResource(config);
+						resource.setContainer($(window));
+						utils.onScrollToBottom('infinityScroll', function() {
+							resource.more();
+						});
+						return resource;
+					}
+				};
+			}
+		};
+	});
+	angular.module('utils').factory('logger', [function() {
 		var logIt;
 		toastr.options = {
 			"closeButton" : true,
@@ -900,5 +833,5 @@
 				logIt(message, 'error', callback);
 			}
 		};
-	} ])
+	}])
 })();
